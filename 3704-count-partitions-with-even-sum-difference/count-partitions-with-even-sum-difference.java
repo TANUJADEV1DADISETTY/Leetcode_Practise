@@ -14,6 +14,7 @@ class Solution {
                 count++;
             }
             i++;
+            sumRight = 0;
         }
         return count;
     }
