@@ -1,31 +1,41 @@
 class Solution {
-    public static boolean eatBananas(int[] piles, int h, int k) {
-        int hrs = 0;
-        for (int i = 0; i < piles.length; i++) {
-            hrs += (piles[i] + k - 1) / k;  
-        }
-        return hrs <= h;
-    }
-
-    public static int minEatingSpeed(int[] piles, int h) {
-        int left = 1;
-        int right = 0;
-
-        // find max pile
-        for (int p : piles) {
-            if (p > right) right = p;
-        }
-
-        while (left < right) {
-            int mid = left + (right - left) / 2;
-
-            if (eatBananas(piles, h, mid)) {
-                right = mid; // try smaller speed
-            } else {
-                left = mid + 1; // need more speed
+    public static int maxNum(int[] arr) {
+        int max = Integer.MIN_VALUE;
+        for(int i = 0; i < arr.length; i++) {
+            if(arr[i] > max) {
+                max = arr[i];
             }
         }
+        return max;
+    }
 
-        return left; // min speed where she can finish in h hours
+    public static int arraySum(int[] arr) {
+        int sum = 0;
+        for(int i = 0; i < arr.length; i++) {
+            sum += arr[i];
+        }
+        return sum;
+    }
+    public static int minEatingSpeed(int[] piles, int h) {
+        int low = 1;
+        int high = maxNum(piles);
+        int min = Integer.MAX_VALUE;
+        int ans = arraySum(piles);
+        while(low <= high) {
+            int mid = low + (high - low) / 2;
+            long totalhours = 0;
+
+            for(int i = 0; i < piles.length; i++) {
+                totalhours += (piles[i] + mid - 1) / mid;
+            }
+            if(totalhours <= h) {
+                min = mid;
+                high = mid - 1;
+            }
+            else {
+                low = mid + 1;
+            }
+        }
+        return min;
     }
 }
