@@ -9,17 +9,22 @@ class Solution {
             prefix[i] = prefix[i-1] + nums[i];
         }
 
-        int idx = 0;
-        while(idx < queries.length) {
+       for(int i = 0; i < queries.length; i++) {
+            int low = 0;
+            int high = nums.length - 1;
             int ans = 0;
-            for(int i = 0; i < prefix.length; i++) {
-                if(prefix[i] <= queries[idx]) {
-                    ans = i+1;
+            while(low <= high) {
+                int mid = (low+high) / 2;
+                if(prefix[mid] <= queries[i]) {
+                    ans = mid + 1;
+                    low = mid + 1;
+                }
+                else {
+                    high = mid - 1;
                 }
             }
-            answer[idx] = ans;
-            idx++;
-        }
+            answer[i] = ans;
+       }
         
         return answer;
     }
