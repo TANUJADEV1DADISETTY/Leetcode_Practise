@@ -8,15 +8,15 @@ class Solution {
         }
         return max;
     }
-
-    public static int arraySum(int[] arr) {
+     public static int arraySum(int[] arr) {
         int sum = 0;
         for(int i = 0; i < arr.length; i++) {
             sum += arr[i];
         }
         return sum;
     }
-    public static int minEatingSpeed(int[] piles, int h) {
+
+    public int minEatingSpeed(int[] piles, int h) {
         int low = 1;
         int high = maxNum(piles);
         int min = Integer.MAX_VALUE;
